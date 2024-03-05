@@ -2,6 +2,7 @@ React Routers Recipes:
 
 https://github.com/Tunafan/ReactRoutesRecipes
 
+https://wonderful-desert-0d9e1b510.5.azurestaticapps.net
 
 
 Jeg har nået hele part 1 samt part 2.
