@@ -1,9 +1,8 @@
 import { API_URL } from "../settings";
-import  { makeOptions,handleHttpErrors } from "./fetchUtils";
+import { makeOptions, handleHttpErrors } from "./fetchUtils";
 const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
-
 
 interface Recipe {
   id: number | null;
@@ -23,6 +22,7 @@ interface Info {
 }
 
 let categories: Array<string> = [];
+// @ts-ignore
 let recipes: Array<Recipe> = [];
 
 async function getCategories(): Promise<Array<string>> {
@@ -32,13 +32,14 @@ async function getCategories(): Promise<Array<string>> {
   return categories;
 }
 async function getRecipes(category: string | null): Promise<Array<Recipe>> {
-  //if (recipes.length > 0) return [...recipes];
+  if (recipes.length > 0) return [...recipes];
   console.log("category", category);
   const queryParams = category ? "?category=" + category : "";
   return fetch(RECIPE_URL + queryParams).then(handleHttpErrors);
 }
 async function getRecipe(id: number): Promise<Recipe> {
-  //if (recipes.length > 0) return [...recipes];
+  //@ts-ignore
+  if (recipes.length > 0) return [...recipes];
   return fetch(RECIPE_URL + "/" + id).then(handleHttpErrors);
 }
 async function addRecipe(newRecipe: Recipe): Promise<Recipe> {
@@ -58,4 +59,11 @@ async function getInfo(): Promise<Info> {
 
 export type { Recipe, Info };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo };
+export {
+  getCategories,
+  getRecipes,
+  getRecipe,
+  addRecipe,
+  deleteRecipe,
+  getInfo,
+};
